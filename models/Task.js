@@ -1,21 +1,20 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const UserSchema = new Schema({
-  name: {
+const TaskSchema = new Schema({
+  title: {
     type: String,
     required: true,
     max: 100
   },
-  email: {
+  description: {
     type: String,
-    required: true,
-    max: 100
+    required: false,
   },
-  password: {
+  status: {
     type: String,
-    required: true,
-    max: 100
+    enum: ['incomplete', 'complete'],
+    default: 'incomplete',
   },
 }, {
   timestamps: {
@@ -25,7 +24,7 @@ const UserSchema = new Schema({
 });
 
 
-// UserSchema.methods.accessAdminPanel = () => {
+// TaskSchema.methods.accessAdminPanel = () => {
 //   if (this.role == userRole.ADMIN ||
 //     this.role == userRole.ADMIN) {
 //     return true;
@@ -35,4 +34,4 @@ const UserSchema = new Schema({
 
 
 //Export model
-module.exports = mongoose.model('User', UserSchema);
+module.exports = mongoose.model('Task', TaskSchema);
