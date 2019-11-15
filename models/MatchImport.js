@@ -1,0 +1,16 @@
+const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
+
+const MatchImportSchema = new Schema({
+    importId: {
+        type: Number,
+        required: true
+      }
+}, {
+    timestamps: {
+      createdAt: 'created_at',
+      updatedAt: 'updated_at',
+    }
+  });
+
+module.exports = mongoose.model('MatchImport', MatchImportSchema);

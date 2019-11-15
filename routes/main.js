@@ -5,6 +5,7 @@ const router = express.Router();
 
 router.use('/users', require('./users.js'));
 router.use('/tasks', require('./tasks.js'));
+router.use('/parse', require('./parse.js'));
 
 
 module.exports = router;

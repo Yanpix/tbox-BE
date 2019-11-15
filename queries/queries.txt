@@ -1,0 +1,1 @@
+db.getCollection('matches').find({$or: [{homeTeam: "Juventus", isDraw:false, isHomeWinner:true}, {awayTeam: "Juventus",isDraw:false,isHomeWinner:false}]})  
