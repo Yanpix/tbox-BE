@@ -1,3 +1,4 @@
 {
-    "photoUploadDir": "/uploads"
+    "photoUploadDir": "/uploads",
+    "newsSourceUrl": "http://feeds.bbci.co.uk/news/rss.xml"
 }
