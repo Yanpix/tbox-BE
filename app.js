@@ -11,8 +11,8 @@ const passport = require('passport');
 const routes = require('./routes/main');
 const app = express();
 const mongoose = require('mongoose');
-
-
+const fs = require('fs');
+const CONFIG = JSON.parse(fs.readFileSync('config.json', 'utf8').trim());
 const mongoDB = 'mongodb://127.0.0.1/therapy-box';
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true, });
 mongoose.Promise = global.Promise;
@@ -27,10 +27,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 // app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 app.use(cookieParser());
-
-// app.use(multer({ storage: storage }).any());
 
 app.use(session({
   name: 'session',
@@ -38,8 +35,13 @@ app.use(session({
   proxy: true,
   resave: true,
   saveUninitialized: true }));
+<<<<<<< HEAD
 // app.use(express.static(path.join(__dirname, 'public')));
 //app.use(express.static(path.join(__dirname, 'uploads')));
+=======
+
+app.use(CONFIG.photoUploadDir, express.static(path.join(__dirname, CONFIG.photoUploadDir)));
+>>>>>>> master
 
 // pasport must always to be under all models and before all routes
 // require('./config/passport_old')(passport);
@@ -69,7 +71,8 @@ app.use(function (err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  // res.render('error');
+  res.json(err);
 });
 
 module.exports = app;
