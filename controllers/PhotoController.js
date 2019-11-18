@@ -18,12 +18,10 @@ exports.getOne = async function (req, res) {
 
 
 exports.create = async function (req, res) {
-    console.log("TCL: req", req.files)
-
     let models = [];
     if (req.files) {
         for (let i = 0; i < req.files.length; i++) {
-            req.files[i].url = CONFIG.photoUploadDir + '/' + req.files[i].filename
+            req.files[i].url = CONFIG.photoUploadDir + '/resized/' + req.files[i].filename
             let model = await Photo.create(req.files[i])
                 .catch(err => {
                     console.log("TCL: err", err.message);
@@ -32,7 +30,6 @@ exports.create = async function (req, res) {
             models.push(model);
         }
     }
-
     return models ? res.json(models) : [];
 };
 

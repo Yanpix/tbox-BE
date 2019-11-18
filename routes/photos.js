@@ -5,6 +5,7 @@ const isAuthenticated = require('../auth/isAuthenticated');
 const accessDashboard = require('../auth/accessDashboard');
 const bodyParser = require('body-parser');
 const upload = require('../helpers/upload');
+const resizeImages = require('../middleware/resizeImages');
 
 
 // router.all('*', isAuthenticated, accessDashboard);
@@ -19,16 +20,9 @@ router.post('/create', bodyParser.urlencoded({
         req.params.multerDestinationFolder = 'uploads';
         next();
     },
-    // upload.array('images', 20),
-    // upload.single('video', 1),
-    // upload.fields([{
-    //     name: 'images',
-    //     maxCount: 20
-    // }, {
-    //     name: 'video',
-    //     maxCount: 1
-    // }]),
-    upload.any(), PhotoController.create);
+    upload.any(),
+    resizeImages,
+    PhotoController.create);
 
 router.get('/:id', PhotoController.getOne);
 router.delete('/:id/delete', PhotoController.delete);
