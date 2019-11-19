@@ -34,8 +34,8 @@ app.use(session({
   secret: 'keyboard cat',
   proxy: true,
   resave: true,
-  saveUninitialized: true }
-  ));
+  saveUninitialized: true }));
+
 // app.use(express.static(path.join(__dirname, 'public')));
 //app.use(express.static(path.join(__dirname, 'uploads')));
 app.use(CONFIG.photoUploadDir, express.static(path.join(__dirname, CONFIG.photoUploadDir)));
@@ -50,6 +50,14 @@ app.use(CONFIG.photoUploadDir, express.static(path.join(__dirname, CONFIG.photoU
 // passport.deserializeUser(auth.deserializeUser);
 
 // app.use(flash());
+
+app.use(
+    bodyParser.urlencoded({
+      extended: true
+    })
+);
+
+app.use(bodyParser.json())
 
 app.use(routes);
 

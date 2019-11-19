@@ -10,4 +10,5 @@ router.use('/photos', require('./photos.js'));
 router.use('/news', require('./news.js'));
 router.use('/sports', require('./sports.js'));
 
+
 module.exports = router;
