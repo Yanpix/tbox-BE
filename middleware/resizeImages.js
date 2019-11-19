@@ -7,7 +7,14 @@ module.exports = async (req, res, next) => {
         let {
             filename: image
         } = req.files[i];
-        // console.log("TCL: image", image)
+        let uploadDir = req.files[i].destination + "/resized";
+        // console.log("TCL: uploadDir", uploadDir)
+
+        if (!fs.existsSync(uploadDir)) {
+            fs.mkdirSync(uploadDir, {
+              recursive: true
+            });
+          }
 
         await sharp(req.files[i].path)
             .resize(280, 280)
@@ -15,7 +22,7 @@ module.exports = async (req, res, next) => {
                 quality: 80
             })
             .toFile(
-                path.resolve(req.files[i].destination, 'resized', image)
+                path.resolve(uploadDir, image)
             )
         // fs.unlinkSync(req.files[i].path)
     }
