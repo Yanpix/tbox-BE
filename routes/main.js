@@ -5,12 +5,9 @@ const router = express.Router();
 
 router.use('/users', require('./users.js'));
 router.use('/tasks', require('./tasks.js'));
-<<<<<<< HEAD
 router.use('/parse', require('./parse.js'));
-=======
 router.use('/photos', require('./photos.js'));
 router.use('/news', require('./news.js'));
->>>>>>> master
-
+router.use('/sports', require('./sports.js'));
 
 module.exports = router;
