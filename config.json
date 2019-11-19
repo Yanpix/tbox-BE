@@ -1,4 +1,6 @@
 {
+    "JWTSecret": "nrtohvWEyo4545gergv",
     "photoUploadDir": "/uploads",
+    "userProfilePictureUploadDir": "/uploads/profile_pictures",
     "newsSourceUrl": "http://feeds.bbci.co.uk/news/rss.xml"
 }

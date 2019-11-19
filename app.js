@@ -5,9 +5,6 @@ const session = require('express-session');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const path = require('path');
-const util = require('util');
-// const logger = require('morgan');
-const passport = require('passport');
 const routes = require('./routes/main');
 const app = express();
 const mongoose = require('mongoose');
@@ -37,19 +34,6 @@ app.use(session({
   saveUninitialized: true }));
 
 app.use(CONFIG.photoUploadDir, express.static(path.join(__dirname, CONFIG.photoUploadDir)));
-
-// pasport must always to be under all models and before all routes
-// require('./config/passport_old')(passport);
-// app.use(passport.initialize());
-// app.use(passport.session());
-
-// unused
-// passport.use(auth.googleStrategy);
-// passport.serializeUser(auth.serializeUser);
-// passport.deserializeUser(auth.deserializeUser);
-
-// app.use(flash());
-
 app.use(routes);
 
 // catch 404 and forward to error handler

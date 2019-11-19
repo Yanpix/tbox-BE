@@ -9,9 +9,10 @@ const storage = multer.diskStorage({
     let uploadDir = path.normalize(__dirname + `/../${folder}`);
     // console.log("TCL: uploadDir", uploadDir)
     if (!fs.existsSync(uploadDir)) {
-      fs.mkdirSync(uploadDir, {
-        recursive: true
-      });
+      // fs.mkdirSync(uploadDir, {
+      //   recursive: true
+      // });
+      createDirRecursively(uploadDir);
     }
     cb(null, uploadDir);
   },
@@ -25,5 +26,13 @@ const storage = multer.diskStorage({
 const upload = multer({
   storage: storage
 });
+
+
+function createDirRecursively(dir) {
+  if (!fs.existsSync(dir)) {        
+      createDirRecursively(path.join(dir, ".."));
+      fs.mkdirSync(dir);
+  }
+}
 
 module.exports = upload;

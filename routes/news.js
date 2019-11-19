@@ -1,12 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const NewsController = require('../controllers/NewsController');
-const isAuthenticated = require('../auth/isAuthenticated');
-const accessDashboard = require('../auth/accessDashboard');
+const verifyToken = require('../auth/VerifyToken');
 
 
-// router.all('*', isAuthenticated, accessDashboard);
-
+router.all('*', verifyToken);
 router.get('/', NewsController.getAll);
 
 
