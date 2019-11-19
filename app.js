@@ -51,6 +51,14 @@ app.use(CONFIG.photoUploadDir, express.static(path.join(__dirname, CONFIG.photoU
 
 // app.use(flash());
 
+app.use(
+    bodyParser.urlencoded({
+      extended: true
+    })
+);
+
+app.use(bodyParser.json())
+
 app.use(routes);
 
 // catch 404 and forward to error handler
