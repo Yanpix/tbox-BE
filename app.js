@@ -36,6 +36,12 @@ app.use(session({
 // app.use(express.static(path.join(__dirname, 'public')));
 //app.use(express.static(path.join(__dirname, 'uploads')));
 app.use(CONFIG.photoUploadDir, express.static(path.join(__dirname, CONFIG.photoUploadDir)));
+app.use(
+    bodyParser.urlencoded({
+      extended: true
+    })
+);
+app.use(bodyParser.json())
 app.use(routes);
 
 // catch 404 and forward to error handler
