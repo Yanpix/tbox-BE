@@ -35,14 +35,10 @@ app.use(session({
   proxy: true,
   resave: true,
   saveUninitialized: true }));
-<<<<<<< HEAD
+
 // app.use(express.static(path.join(__dirname, 'public')));
 //app.use(express.static(path.join(__dirname, 'uploads')));
-=======
-
 app.use(CONFIG.photoUploadDir, express.static(path.join(__dirname, CONFIG.photoUploadDir)));
->>>>>>> master
-
 // pasport must always to be under all models and before all routes
 // require('./config/passport_old')(passport);
 // app.use(passport.initialize());
