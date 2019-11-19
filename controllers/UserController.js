@@ -18,14 +18,14 @@ exports.getOne = async function (req, res) {
 
 
 exports.register = async function (req, res) {
-    // let existed = await User.findOne({
-    //         name: req.body.name
-    //     })
-    //     .catch(err => {
-    //         console.log("TCL: err", err.message);
-    //         return res.status(400).json(err);
-    //     });
-    // if (existed != null) return res.status(400).json('user is already registered');
+    let existed = await User.findOne({
+            name: req.body.name
+        })
+        .catch(err => {
+            console.log("TCL: err", err.message);
+            return res.status(400).json(err);
+        });
+    if (existed != null) return res.status(400).json('user is already registered');
     if (req.body.password == null) return res.status(400).json('no password');
 
     req.body.hashedPassword = await cryptor.encrypt(req.body.password);
