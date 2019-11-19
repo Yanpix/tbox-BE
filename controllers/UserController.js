@@ -1,4 +1,6 @@
+const CONFIG = require('../config.json');
 const User = require('../models/User');
+const cryptor = require('../helpers/cryptor');
 
 
 exports.getAll = async function (req, res) {
@@ -15,13 +17,26 @@ exports.getOne = async function (req, res) {
 };
 
 
-exports.register = function (req, res) {
-    console.log("TCL: exports.create -> req.body", req.body)
-    res.send('NOT IMPLEMENTED: User create POST');
-};
+exports.register = async function (req, res) {
+    // let existed = await User.findOne({
+    //         name: req.body.name
+    //     })
+    //     .catch(err => {
+    //         console.log("TCL: err", err.message);
+    //         return res.status(400).json(err);
+    //     });
+    // if (existed != null) return res.status(400).json('user is already registered');
+    if (req.body.password == null) return res.status(400).json('no password');
 
+    req.body.hashedPassword = await cryptor.encrypt(req.body.password);
 
-exports.create = async function (req, res) {
+    // add profiles picture url
+    if (req.file && req.file.filename) {
+        req.file.url = `${CONFIG.userProfilePictureUploadDir}/${req.file.filename}`;
+        req.body.profile_picture = req.file;
+    }
+
+    // create User
     let model = await User.create(req.body)
         .catch(err => {
             console.log("TCL: err", err.message);

@@ -1,14 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const TaskController = require('../controllers/TaskController');
-const isAuthenticated = require('../auth/isAuthenticated');
-const accessDashboard = require('../auth/accessDashboard');
+const verifyToken = require('../auth/VerifyToken');
 
 
-// router.all('*', isAuthenticated, accessDashboard);
-
+router.all('*', verifyToken);
 router.get('/', TaskController.getAll);
-
 router.post('/create', TaskController.create);
 router.get('/:id', TaskController.getOne);
 router.put('/:id/update', TaskController.update);

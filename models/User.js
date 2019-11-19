@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const cryptor = require('../helpers/cryptor');
 
 const UserSchema = new Schema({
   name: {
@@ -12,11 +13,14 @@ const UserSchema = new Schema({
     required: true,
     max: 100
   },
-  password: {
+  hashedPassword: {
     type: String,
     required: true,
     max: 100
   },
+  profile_picture: {
+    type: Object,
+  }
 }, {
   timestamps: {
     createdAt: 'created_at',
@@ -25,13 +29,9 @@ const UserSchema = new Schema({
 });
 
 
-// UserSchema.methods.accessAdminPanel = () => {
-//   if (this.role == userRole.ADMIN ||
-//     this.role == userRole.ADMIN) {
-//     return true;
-//   }
-//   return false;
-// };
+UserSchema.methods.passwordIsValid = function (pass) {
+  return pass == cryptor.decrypt(this.hashedPassword);
+}
 
 
 //Export model
