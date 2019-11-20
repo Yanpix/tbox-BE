@@ -15,6 +15,7 @@ mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true, });
 mongoose.Promise = global.Promise;
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+const cors = require('cors');
 
 // // view engine setup
 // app.engine('ejs', require('ejs-locals'));
@@ -32,6 +33,7 @@ app.use(session({
   proxy: true,
   resave: true,
   saveUninitialized: true }));
+app.use(cors());
 
 // app.use(express.static(path.join(__dirname, 'public')));
 //app.use(express.static(path.join(__dirname, 'uploads')));

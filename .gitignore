@@ -3,3 +3,4 @@ node_modules
 !/uploads/soccer/I1.csv
 package-lock.json
 .idea/
+uploads
