@@ -30,7 +30,8 @@ module.exports.login = function (req, res) {
         });
         res.json({
             auth: true,
-            token: token
+            token: token,
+            user
         });
     });
 }
