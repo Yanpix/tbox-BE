@@ -4,7 +4,8 @@ const Photo = require('../models/Photo');
 
 
 exports.getAll = async function (req, res) {
-    let models = await Photo.find()
+    //let models = await Photo.find()
+	let models = await Photo.find({userID: req.user.id})
         .catch(err => console.log(err.message))
     return models ? res.json(models) : [];
 };
@@ -21,6 +22,7 @@ exports.create = async function (req, res) {
     let models = [];
     if (req.files) {
         for (let i = 0; i < req.files.length; i++) {
+			req.files[i].userID = req.user.id;
             req.files[i].url = CONFIG.photoUploadDir + '/resized/' + req.files[i].filename
             let model = await Photo.create(req.files[i])
                 .catch(err => {
